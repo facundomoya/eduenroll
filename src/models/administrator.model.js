@@ -1,46 +1,39 @@
 import { DataTypes } from "sequelize";
-import {sequelize} from "../database/connect.js";
-import User from "./user.model.js";
+import { sequelize } from "../database/connect.js";
 
-const Administrator = sequelize.define("Administrator", {
+const Administrator = sequelize.define(
+  "Administrator",
+  {
     id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
     },
     name: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     lastname: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     email: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     age: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     administratorId: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
-}, {
+  },
+  {
     timestamps: true,
-    tableName: "administrator"
-});
-
-Administrator.hasOne(User, {
-foreignKey: 'id_administrator',
-sourceKey: 'id'
-});
-
-User.belongsTo(Administrator, {
-foreignKey: 'id_administrator',
-targetKey: 'id'
-});
+    tableName: "administrator",
+  }
+);
 
 export default Administrator;
