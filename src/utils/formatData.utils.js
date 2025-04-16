@@ -6,5 +6,6 @@ export const mixParams = (req) => {
     if (file) data = { ...data, file }
     if (query) data = { ...data, ...query }
     if (body) data = { ...data, ...body }
-    return data
+    return data;
 }
+ 
