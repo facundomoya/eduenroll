@@ -23,9 +23,20 @@ const getUser = async (req, res) => {
   return res.status(200).json({ data, code: 200 });
 }
 
+const addProfessorUser = async (req, res) => {
+  const request = mixParams(req);
+  const { data, error } = await userServices.addProfessorUser(request);
+
+  if (error) {
+    return res.status(500).json({ error, code: 500 });
+  }
+
+  return res.status(200).json({ data, code: 200 });
+}
+
 const addAdminUser = async (req, res) => {
 const request = mixParams(req);
-const { data, error } = await userServices.addUser(request);
+const { data, error } = await userServices.addAdminUser(request);
 if(error){
   return res.status(500).json({ error, code: 500 });
 }
@@ -35,6 +46,7 @@ return res.status(200).json({ data, code: 200 });
 
 export const userController = {
   getAllUsers,
+  addProfessorUser,
   addAdminUser,
   getUser
 };

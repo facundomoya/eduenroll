@@ -1,6 +1,7 @@
 import {sequelize} from '../database/connect.js';
 import User from '../models/user.model.js';
 import Administrator from '../models/administrator.model.js';
+import Professor from '../models/professor.model.js';
 
 const getAllUsers = async(params) => {
     try {
@@ -24,11 +25,24 @@ const getUser = async(params) => {
   }
 }
 
+const addProfessorUser = async(request) => {
+  try {
+    const data = await User.create(request.user);
+    const data_professor = await Professor.create({
+      ...request.professor,
+      id_user: data.id
+    });
+    return { data, data_professor };
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
 const addAdminUser = async(request) => {
   try {
-    const data = await User.create(request.body);
+    const data = await User.create(request.user);
     const data_admin = await Administrator.create({
-     ...request.body,
+     ...request.admin,
       id_user: data.id
     });
     return { data, data_admin };
@@ -39,6 +53,7 @@ const addAdminUser = async(request) => {
 
 export const userServices = {
     getAllUsers,
+    addProfessorUser,
     addAdminUser,
     getUser
 };
