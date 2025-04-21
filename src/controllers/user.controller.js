@@ -12,6 +12,17 @@ const getAllUsers = async (req, res) => {
   return res.status(200).json({ data, code: 200 });
 };
 
+const getUser = async (req, res) => {
+  const params = mixParams(req);
+  const { data, error } = await userServices.getUser(params);
+
+  if (error) {
+    return res.status(500).json({ error, code: 500 });
+  }
+
+  return res.status(200).json({ data, code: 200 });
+}
+
 const addAdminUser = async (req, res) => {
 const request = mixParams(req);
 const { data, error } = await userServices.addUser(request);
@@ -24,5 +35,6 @@ return res.status(200).json({ data, code: 200 });
 
 export const userController = {
   getAllUsers,
-  addAdminUser
+  addAdminUser,
+  getUser
 };

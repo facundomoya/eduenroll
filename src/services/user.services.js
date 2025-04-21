@@ -11,6 +11,19 @@ const getAllUsers = async(params) => {
       }
 };
 
+const getUser = async(params) => {
+  try {
+    const data = await User.findOne({
+      where: {
+        id: params.id
+      }
+    });
+    return { data };
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
 const addAdminUser = async(request) => {
   try {
     const data = await User.create(request.body);
@@ -26,7 +39,8 @@ const addAdminUser = async(request) => {
 
 export const userServices = {
     getAllUsers,
-    addAdminUser
+    addAdminUser,
+    getUser
 };
 
 
