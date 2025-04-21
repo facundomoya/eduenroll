@@ -12,7 +12,7 @@ const getAllUsers = async (req, res) => {
   return res.status(200).json({ data, code: 200 });
 };
 
-const addUser = async (req, res) => {
+const addAdminUser = async (req, res) => {
 const request = mixParams(req);
 const { data, error } = await userServices.addUser(request);
 if(error){
@@ -24,5 +24,5 @@ return res.status(200).json({ data, code: 200 });
 
 export const userController = {
   getAllUsers,
-  addUser
+  addAdminUser
 };

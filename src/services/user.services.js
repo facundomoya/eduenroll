@@ -11,7 +11,7 @@ const getAllUsers = async(params) => {
       }
 };
 
-const addUser = async(request) => {
+const addAdminUser = async(request) => {
   try {
     const data = await User.create(request.body);
     const data_admin = await Administrator.create({
@@ -26,7 +26,7 @@ const addUser = async(request) => {
 
 export const userServices = {
     getAllUsers,
-    addUser
+    addAdminUser
 };
 
 
