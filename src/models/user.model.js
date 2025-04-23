@@ -35,6 +35,7 @@ User.hasOne(Administrator, {
 Administrator.belongsTo(User, {
   foreignKey: "id_user",
   targetKey: "id",
+  onDelete: 'CASCADE', // Esto borra el Administrator si borras el User
 });
 
 //User - Professor
@@ -46,6 +47,7 @@ User.hasOne(Professor, {
 Professor.belongsTo(User, {
   foreignKey: "id_user",
   targetKey: "id",
+  onDelete: 'CASCADE', // Esto borra el Professor si borras el User
 });
 
 export default User;

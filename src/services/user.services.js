@@ -51,11 +51,25 @@ const addAdminUser = async(request) => {
   }
 } 
 
+const deleteProfessorUser = async(params) => {
+  try {
+    const data= await User.destroy({
+      where: {
+        id: params.id
+      }
+    });
+    return { data };
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
 export const userServices = {
     getAllUsers,
     addProfessorUser,
     addAdminUser,
-    getUser
+    getUser,
+    deleteProfessorUser
 };
 
 

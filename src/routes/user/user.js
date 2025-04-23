@@ -7,5 +7,6 @@ route.get("/user", userController.getAllUsers);
 route.get("/user/:id", userController.getUser);
 route.post("/user/administrator", userController.addAdminUser);
 route.post("/user/professor", userController.addProfessorUser);
+route.delete("/user/:id", userController.deleteProfessorUser);
 
 export default route;

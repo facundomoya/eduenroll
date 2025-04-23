@@ -44,9 +44,21 @@ if(error){
 return res.status(200).json({ data, code: 200 });
 } 
 
+const deleteProfessorUser = async (req, res) => {
+  const params = mixParams(req);
+  const { data, error } = await userServices.deleteProfessorUser(params);
+
+  if (error) {
+    return res.status(500).json({ error, code: 500 });
+  }
+
+  return res.status(200).json({ data, code: 200 });
+}
+
 export const userController = {
   getAllUsers,
   addProfessorUser,
   addAdminUser,
-  getUser
+  getUser,
+  deleteProfessorUser
 };
