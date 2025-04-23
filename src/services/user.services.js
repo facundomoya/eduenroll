@@ -64,12 +64,30 @@ const deleteProfessorUser = async(params) => {
   }
 }
 
+const updateUser = async(params) => {
+  try {
+    const data = await User.update({
+      user_name: params.user.user_name,
+      password: params.user.password,
+    },
+  {
+    where: {
+      id: params.id,
+    }
+  });
+    return { data };
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
 export const userServices = {
     getAllUsers,
     addProfessorUser,
     addAdminUser,
     getUser,
-    deleteProfessorUser
+    deleteProfessorUser,
+    updateUser
 };
 
 
