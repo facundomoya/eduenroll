@@ -1,5 +1,5 @@
 1. Trabajar en cascada borra un registro de la tabla hija y lo borra de la tabla padre (ej: user y administrator)
 2. JWT revisar bien como se llega al token
 3. El borrado nunca es fisico siempre logico, se actualiza la columna delete_at, pero no se borra nada fisicamente, 
-si no que desde el frontend solo trae los que tienen vacio el ese campo en el registro
-4. 
+si no que desde el frontend solo trae los que tienen vacio ese campo en el registro
+4. zod es para validación de los datos (librería)
