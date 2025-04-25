@@ -4,8 +4,19 @@ import Administrator from '../models/administrator.model.js';
 import Professor from '../models/professor.model.js';
 
 const getAllUsers = async(params) => {
+  const { user_name, password } = params;
+  const data_search = {};
+
+  user_name && (data_search.user_name = user_name);
+  password && (data_search.password = password);
+
+
+
+
     try {
-        const data = await User.findAll(params.body);
+        const data = await User.findAll({
+          where: data_search
+        });
         return { data };
       } catch (error) {
         return { error: error.message };
