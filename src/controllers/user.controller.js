@@ -4,7 +4,7 @@ import { userServices } from "../services/user.services.js";
 const getAllUsers = async (req, res) => {
   const params = mixParams(req);
   const { data, error } = await userServices.getAllUsers(params);
-
+  
   if (error) {
     return res.status(500).json({ error, code: 500 });
   }

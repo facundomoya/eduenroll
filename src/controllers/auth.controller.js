@@ -8,11 +8,11 @@ const login = async (req, res) => {
     if (error) {
       return res.status(401).json({ error, code: 401 });
     }
-
     return res.status(200).json({ data, code: 200 });
   } catch (error) {
     return res.status(500).json({ error: error.message, code: 500 });
   }
+  
 };
 
 export const authController = {

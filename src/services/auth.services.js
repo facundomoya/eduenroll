@@ -14,16 +14,16 @@ export const authServices = {
           password: password 
            
       });
-      //console.log('user', user_name, password);
-      if (error || !user) {
+      
+      if (error || !user || user.length === 0) {
         throw new Error('Credenciales inválidas');
       }
 
 
       const token = jwt.sign(
         { 
-          id: user.id, 
-          user_name: user.user_name,
+          id: user[0]?.id, 
+          user_name: user[0]?.user_name,
         },
         config.JWT_SECRET,
         { expiresIn: '1h' }
