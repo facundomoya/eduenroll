@@ -34,6 +34,4 @@ export const authServices = {
       return { error: error.message };
     }
   },
-
-
 };
