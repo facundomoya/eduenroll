@@ -1,10 +1,10 @@
+import { mixParams } from "../../utils/formatData.utils.js";
 import { userSchema } from "../user.schema.js";
 
 const save = async (req, res, next) => {
   try {
-    const {body} = req;
-    console.log(body);
-    const result = userSchema.safeParse(body);
+    const data = mixParams(req);
+    const result = userSchema.safeParse(data.user);
     if (!result.success) return res.json(({error: result.error.issues,code:400})).status(400);
     next();
   } catch (error) {
