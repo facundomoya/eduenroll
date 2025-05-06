@@ -1,10 +1,10 @@
 import { mixParams } from "../../utils/formatData.utils.js";
-import { admin_userSchema } from "../admin_user.schema.js";
+import { professor_userSchema } from "../professor_user.schema.js";
 
-const admin_save = async (req, res, next) => {
+const professor_save = async (req, res, next) => {
   try {
     const data = mixParams(req);
-    const result = admin_userSchema.safeParse(data);
+    const result = professor_userSchema.safeParse(data);
     if (!result.success) return res.json(({error: result.error.issues,code:400})).status(400);
     next();
   } catch (error) {
@@ -13,5 +13,5 @@ const admin_save = async (req, res, next) => {
 }
 
 export const userValidator = {
-  admin_save,
+  professor_save
 };
