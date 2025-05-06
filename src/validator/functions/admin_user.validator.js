@@ -1,10 +1,10 @@
 import { mixParams } from "../../utils/formatData.utils.js";
-import { userSchema } from "../user.schema.js";
+import { admin_userSchema } from "../admin_user.schema.js";
 
-const save = async (req, res, next) => {
+const admin_save = async (req, res, next) => {
   try {
     const data = mixParams(req);
-    const result = userSchema.safeParse(data.user);
+    const result = admin_userSchema.safeParse(data);
     if (!result.success) return res.json(({error: result.error.issues,code:400})).status(400);
     next();
   } catch (error) {
@@ -13,5 +13,5 @@ const save = async (req, res, next) => {
 }
 
 export const userValidator = {
-  save
+  admin_save
 };
