@@ -13,5 +13,5 @@ const admin_save = async (req, res, next) => {
 }
 
 export const userValidator = {
-  admin_save,
+  admin_save
 };
