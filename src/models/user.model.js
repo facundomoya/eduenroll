@@ -2,6 +2,7 @@ import { DataTypes } from "sequelize";
 import { sequelize } from "../database/connect.js";
 import Administrator from "./administrator.model.js";
 import Professor from "./professor.model.js";
+import Register from "./register.model.js";
 
 const User = sequelize.define(
   "User",
@@ -48,6 +49,18 @@ Professor.belongsTo(User, {
   foreignKey: "id_user",
   targetKey: "id",
   onDelete: 'CASCADE', // Esto borra el Professor si borras el User
+});
+
+//User - Register
+User.hasMany(Register, {
+  foreignKey: "id_user",
+  sourceKey: "id",
+});
+
+Register.belongsTo(User, {
+  foreignKey: "id_user",
+  targetKey: "id",
+  onDelete: 'CASCADE', // Esto borra el Register si borras el User
 });
 
 export default User;
