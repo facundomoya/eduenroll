@@ -138,7 +138,7 @@ export const userServices = {
     getUser,
     deleteProfessorUser,
     updateUser,
-    getPdf
+    getPdf,
 };
 
 
