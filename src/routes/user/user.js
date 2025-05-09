@@ -13,6 +13,7 @@ route.post("/user/administrator", VerifyToken, userValidator.admin_save, userCon
 route.post("/user/professor", VerifyToken, professorValidator.professor_save, userController.addProfessorUser);
 route.delete("/user/:id", VerifyToken, userController.deleteProfessorUser);
 route.put("/user/:id", VerifyToken, userController.updateUser);
+route.get("/user/pdf/:filename", VerifyToken, userController.getPdf);
 
 route.post("/user/pdf", VerifyToken, upload, (req, res) => {
     // Esta parte solo se ejecuta si no hubo errores

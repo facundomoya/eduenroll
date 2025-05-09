@@ -66,11 +66,25 @@ const updateUser = async (req, res) => {
   return res.status(200).json({ data, code: 200 });
 }
 
+const getPdf = async (req, res) => {
+  // Obtener el nombre del archivo de los parámetros de la ruta
+  const { filename } = req.params;
+  // Llamar al servicio pasando solo el nombre del archivo
+  const { data, error } = await userServices.getPdf(filename); // Cambiado a getPdf
+
+  if (error) {
+    return res.status(404).json({ error, code: 404 }); // 404 cuando no se encuentra
+  }
+
+  return res.status(200).json({ data, code: 200 });
+} 
+
 export const userController = {
   getAllUsers,
   addProfessorUser,
   addAdminUser,
   getUser,
   deleteProfessorUser,
-  updateUser
+  updateUser,
+  getPdf
 };

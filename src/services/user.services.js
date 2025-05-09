@@ -2,6 +2,9 @@ import {sequelize} from '../database/connect.js';
 import User from '../models/user.model.js';
 import Administrator from '../models/administrator.model.js';
 import Professor from '../models/professor.model.js';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path'; // Importa join y dirname de path
+import { readFileSync } from 'fs';
 
 const getAllUsers = async(params) => {
   const { user_name, password } = params;
@@ -92,13 +95,50 @@ const updateUser = async(params) => {
   }
 }
 
+const getPdf = async (filename) => { 
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = dirname(__filename);
+  
+  try {
+    if (!filename) throw new Error("Nombre de archivo no proporcionado");
+    
+    if (filename.includes('..') || filename.includes('/') || filename.includes('\\')) {
+      throw new Error("Nombre de archivo inválido");
+    }
+
+    console.log('__dirname:', __dirname);
+    console.log('Ruta completa:', join(__dirname, 'uploads', filename));
+    // Usa join importado (no path.join)
+    const uploadsDir = join(__dirname, '../uploads');
+    const filePath = join(uploadsDir, filename);
+    
+    // Verificación de seguridad
+    if (!filePath.startsWith(uploadsDir)) {
+      throw new Error("Intento de acceso no permitido");
+    }
+
+    const fileContent = readFileSync(filePath);
+    
+    return { 
+      data: {
+        //content: fileContent.toString('base64'),
+        filename: filename,
+        mimeType: 'application/pdf'
+      } 
+    };
+  } catch (error) {
+    return { error: error.message };
+  }
+};
+
 export const userServices = {
     getAllUsers,
     addProfessorUser,
     addAdminUser,
     getUser,
     deleteProfessorUser,
-    updateUser
+    updateUser,
+    getPdf
 };
 
 
