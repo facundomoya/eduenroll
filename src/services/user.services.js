@@ -131,6 +131,33 @@ const getPdf = async (filename) => {
   }
 };
 
+const getPdfForDownload = async (filename) => { 
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = dirname(__filename);
+
+  try { 
+    if (!filename) throw new Error("Nombre de archivo no proporcionado");
+
+    if (filename.includes('..') || filename.includes('/') || filename.includes('\\')) {
+      throw new Error("Nombre de archivo inválido");
+    }
+
+    const uploadsDir = join(__dirname, '../uploads');
+    const filePath = join(uploadsDir, filename);
+
+    if (!filePath.startsWith(uploadsDir)) {
+      throw new Error("Intento de acceso no permitido");
+    }
+
+    const fileContent = readFileSync(filePath);
+
+    return { fileContent };
+  } catch (error) {
+    return { error: error.message };
+  }
+};
+
+
 export const userServices = {
     getAllUsers,
     addProfessorUser,
@@ -139,29 +166,5 @@ export const userServices = {
     deleteProfessorUser,
     updateUser,
     getPdf,
+    getPdfForDownload
 };
-
-
-/* {
-  "user": {
-    "user_name": "eusebio",
-    "password": "eusebio1234"
-  },
-  "admin": {
-    "name": "Eusebio",
-    "lastname": "Paze",
-    "email": "eu_paz@hotmail.com",
-    "age": 28,
-    "administratorId": 104
-  }
-}
- */
-
-/* const { user, admin } = req.body;
-
-const createdUser = await User.create(user);
-const createdAdmin = await Administrator.create({
-  ...admin,
-  id_user: createdUser.id
-});
- */
